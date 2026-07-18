@@ -1,7 +1,103 @@
 ---
-import BaseLayout from '../layouts/BaseLayout.astro';
-const pageTitle = "Home Page";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const hour = new Date().getHours();
+
+let greeting = "Good evening.";
+
+if (hour >= 5 && hour < 12) {
+  greeting = "Good morning.";
+
+} else if (hour >= 12 && hour < 18) {
+  greeting = "Good afternoon.";
+}
+
+const artwork = [
+  {
+    title: "Forest Shrine",
+    medium: "Watercolor",
+    year: "2024",
+    image: "/images/forest-shrine.jpg",
+  },
+  {
+    title: "Moonlit Garden",
+    medium: "Digital Illustration",
+    year: "2025",
+    image: "/images/moonlit-garden.jpg",
+  },
+  {
+    title: "Herbal Study",
+    medium: "Ink",
+    year: "2024",
+    image: "/images/herbal-study.jpg",
+  },
+  {
+    title: "The Old Woods",
+    medium: "Watercolor",
+    year: "2023",
+    image: "/images/old-woods.jpg",
+  },
+  {
+    title: "Quiet Morning",
+    medium: "Mixed Media",
+    year: "2025",
+    image: "/images/quiet-morning.jpg",
+  },
+];
 ---
-<BaseLayout pageTitle={pageTitle}>
-  <h2>My awesome blog subtitle</h2>
+
+<BaseLayout pageTitle="Studio">
+
+  <main>
+
+    <section class="welcome reveal">
+      <p class="greeting">{greeting}</p>
+
+      <h1>
+        Welcome to a calmer corner of the internet.
+      </h1>
+    </section>
+
+
+    <section class="gallery">
+
+      {artwork.map((piece, index) => (
+        <article 
+          class="art-card reveal"
+          style={`--delay:${index * 120}ms`}
+        >
+
+          <a href={`/gallery/${piece.title.toLowerCase().replaceAll(" ", "-")}`}>
+
+            <figure>
+              <img 
+                src={piece.image}
+                alt={piece.title}
+                loading="lazy"
+              />
+
+              <figcaption>
+                <h2>{piece.title}</h2>
+
+                <p>
+                  {piece.medium} · {piece.year}
+                </p>
+
+                <span>
+                  View piece →
+                </span>
+              </figcaption>
+
+            </figure>
+
+          </a>
+
+        </article>
+      ))}
+
+    </section>
+
+
+  </main>
+
 </BaseLayout>
