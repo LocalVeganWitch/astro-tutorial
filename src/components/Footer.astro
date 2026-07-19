@@ -2,16 +2,98 @@
 import Social from './Social.astro';
 ---
 
-<style>
-  footer {
-    display: flex;
-    gap: 1rem;
-    margin-top: 2rem;
-  }
-</style>
-
 <footer>
-  <Social platform="twitter" username="astrodotbuild" />
-  <Social platform="github" username="withastro" />
-  <Social platform="youtube" username="astrodotbuild" />
+
+  <div class="footer-mark">
+  </div>
+
+  <p class="signature">
+    Michelle Lockamy Illustration
+  </p>
+
+  <nav class="footer-links">
+    <Social platform="instagram" username="amendedmichelle" />
+    <Social platform="youtube" username="michellelockamy" />
+  </nav>
+
+  <p class="copyright">
+    © {new Date().getFullYear()} All rights reserved.
+  </p>
+
 </footer>
+
+
+<style>
+footer {
+
+  margin-top:
+    1rem;
+
+  padding:
+    1rem 0 1rem;
+
+  text-align:
+    center;
+
+  color:
+    var(--muted);
+
+  border-top:
+    1px solid var(--gold);
+
+}
+
+
+.footer-mark {
+
+  font-size:
+    1rem;
+
+  color:
+    var(--gold);
+
+  margin-bottom:
+    1rem;
+
+}
+
+
+.signature {
+
+  font-family:
+    "Oooh Baby",
+    cursive;
+
+  font-size:
+    2rem;
+
+  color:
+    var(--ink);
+
+}
+
+
+.footer-links {
+
+  display:
+    flex;
+
+  justify-content:
+    center;
+
+  gap:
+    1rem;
+
+  margin:
+    2rem 0;
+
+}
+
+
+.copyright {
+
+  font-size:
+    .85rem;
+
+}
+</style>

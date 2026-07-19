@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Oooh+Baby&family=Jost:wght@300;400;500;600&display=swap');
+
 :root {
 
   --paper: #e9e5dc;
@@ -68,7 +70,7 @@ html {
 
 body {
 
-  max-width: 90ch;
+  max-width: 100ch;
 
   margin: auto;
 
@@ -112,23 +114,19 @@ a {
     center;
 
   padding:
-    5rem 0 4rem;
+    4rem 0 4rem;
 
 }
 
 
 .greeting {
 
-  font-family:
-    "Cormorant Garamond",
-    serif;
-
-  font-size:
-    2rem;
-
+  font-family: "Oooh Baby", cursive;
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 400;
+  margin: 0 0 1rem;
   color:
     var(--gold);
-
   margin:
     0;
 
@@ -142,10 +140,27 @@ h1 {
     serif;
 
   font-size:
-    clamp(1rem, 6vw, 2rem);
+    clamp(1rem, 6vw, 2.2rem);
 
   font-weight:
     300;
+
+  margin:
+    .5rem 0;
+
+}
+
+h2 {
+
+  font-family:
+    "Cormorant Garamond",
+    serif;
+
+  font-size:
+    clamp(1rem, 6vw, 1.7rem);
+
+  font-weight:
+    100;
 
   margin:
     .5rem 0;
@@ -373,3 +388,150 @@ figure:hover figcaption {
   }
 
 }
+
+/* ==========================
+   Navigation
+========================== */
+
+.nav-links {
+
+  display: flex;
+
+  justify-content: center;
+
+  align-items: center;
+
+  gap: 2rem;
+
+  padding: 1rem 1.1rem;
+
+  margin-bottom: 3rem;
+
+  background:
+    var(--surface);
+
+  box-shadow:
+    var(--shadow);
+
+  border-radius:
+    15px;
+
+}
+
+
+.nav-links a {
+
+  position: relative;
+
+  color:
+    var(--ink);
+
+  font-size:
+    1.2rem;
+
+  font-weight:
+    200;
+
+  letter-spacing:
+    .08em;
+
+  text-transform:
+    lowercase;
+
+  transition:
+    color .3s ease;
+
+}
+
+
+/* little gold underline */
+
+.nav-links a::after {
+
+  content:
+    "";
+
+  position:
+    absolute;
+
+  left:
+    0;
+
+  bottom:
+    -0.4rem;
+
+  width:
+    100%;
+
+  height:
+    1px;
+
+  background:
+    var(--gold);
+
+  transform:
+    scaleX(0);
+
+  transform-origin:
+    center;
+
+  transition:
+    transform .3s ease;
+
+}
+
+
+.nav-links a:hover {
+
+  color:
+    var(--gold);
+
+}
+
+
+.nav-links a:hover::after {
+
+  transform:
+    scaleX(1);
+
+}
+
+/* ==========================
+   Mobile Navigation
+========================== */
+
+.menu {
+  display: none;
+}
+
+
+@media(max-width:600px){
+
+  .menu {
+    display: block;
+  }
+
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    gap: 1.25rem;
+    border-radius: 15px;
+  }
+
+
+  .nav-links.open {
+    display: flex;
+  }
+
+}
+
+
+@media(min-width:601px){
+
+  .nav-links {
+    display: flex;
+  }
+
+}
+

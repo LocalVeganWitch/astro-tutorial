@@ -7,6 +7,10 @@ import ThemeIcon from './ThemeIcon.astro';
   <nav>
     <div>
       <ThemeIcon />
+      <img
+        class="logo"
+        src={"/Graphics/Gold+Logo-swoopy.webp"}
+        alt="Studio Logo" />
       <Menu />
     </div>
     <Navigation />
@@ -14,8 +18,21 @@ import ThemeIcon from './ThemeIcon.astro';
 </header>
 
 <style>
-  div {
-    display: flex;
-    justify-content: space-between;
-  }
+
+div {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  min-height: 80px;
+}
+
+.logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 130px;
+  height: auto;
+}
+
 </style>

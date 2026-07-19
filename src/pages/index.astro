@@ -1,47 +1,30 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const hour = new Date().getHours();
-
-let greeting = "Good evening.";
-
-if (hour >= 5 && hour < 12) {
-  greeting = "Good morning.";
-
-} else if (hour >= 12 && hour < 18) {
-  greeting = "Good afternoon.";
-}
-
 const artwork = [
   {
     title: "Forest Shrine",
     medium: "Watercolor",
     year: "2024",
-    image: "/images/forest-shrine.jpg",
+    image: "/artwork/forest-shrine.jpg",
   },
   {
     title: "Moonlit Garden",
     medium: "Digital Illustration",
     year: "2025",
-    image: "/images/moonlit-garden.jpg",
+    image: "/artwork/moonlit-garden.jpg",
   },
   {
     title: "Herbal Study",
     medium: "Ink",
     year: "2024",
-    image: "/images/herbal-study.jpg",
+    image: "/artwork/herbal-study.jpg",
   },
   {
     title: "The Old Woods",
     medium: "Watercolor",
     year: "2023",
-    image: "/images/old-woods.jpg",
-  },
-  {
-    title: "Quiet Morning",
-    medium: "Mixed Media",
-    year: "2025",
-    image: "/images/quiet-morning.jpg",
+    image: "/artwork/old-woods.jpg",
   },
 ];
 ---
@@ -49,13 +32,17 @@ const artwork = [
 <BaseLayout pageTitle="Studio">
 
   <main>
-
+      
     <section class="welcome reveal">
-      <p class="greeting">{greeting}</p>
 
-      <h1>
-        Welcome to a calmer corner of the internet.
-      </h1>
+      <p class="greeting" id="greeting">
+        Welcome.
+      </p>
+
+          <h2>
+            Welcome to a calm corner of the internet. ⁠♡
+          </h2>
+
     </section>
 
 
@@ -99,5 +86,21 @@ const artwork = [
 
 
   </main>
+
+<script>
+  const greeting = document.querySelector("#greeting");
+
+  if (greeting) {
+    const hour = new Date().getHours();
+
+    if (hour >= 5 && hour < 12) {
+      greeting.textContent = "Good morning.";
+    } else if (hour >= 12 && hour < 18) {
+      greeting.textContent = "Good afternoon.";
+    } else {
+      greeting.textContent = "Good evening.";
+    }
+  }
+</script>
 
 </BaseLayout>
