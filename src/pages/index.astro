@@ -1,78 +1,78 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
 
-const artwork = [
-  {
-    title: "Forest Shrine",
-    medium: "Watercolor",
-    year: "2024",
-    image: "/artwork/forest-shrine.jpg",
-  },
-  {
-    title: "Moonlit Garden",
-    medium: "Digital Illustration",
-    year: "2025",
-    image: "/artwork/moonlit-garden.jpg",
-  },
-  {
-    title: "Herbal Study",
-    medium: "Ink",
-    year: "2024",
-    image: "/artwork/herbal-study.jpg",
-  },
-  {
-    title: "The Old Woods",
-    medium: "Watercolor",
-    year: "2023",
-    image: "/artwork/old-woods.jpg",
-  },
-];
+const images = Object.values(
+  import.meta.glob("../assets/portfolio/*.{jpg,jpeg,png,webp,avif}", {
+    eager: true,
+    import: "default",
+  })
+).sort((a, b) => a.src.localeCompare(b.src));
+
+const artwork = images.map((image) => {
+  const filename = image.src.split("/").pop()?.split(".")[0] ?? "";
+
+  const title = filename
+    .replace(/[-_]/g, " ")
+    .replace(/\b\w/g, (letter) => letter.toUpperCase());
+
+  return {
+    title,
+    slug: filename,
+    image,
+  };
+});
 ---
 
 <BaseLayout pageTitle="Studio">
 
   <main>
-      
+
     <section class="welcome reveal">
 
       <p class="greeting" id="greeting">
         Welcome.
       </p>
 
-          <h2>
-            ⁺☕︎ ˖·
-          </h2>
+      <h2>
+        ⁺☕︎ ˖·
+      </h2>
 
     </section>
 
-
-    <section class="gallery">
+    <section class="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6">
 
       {artwork.map((piece, index) => (
-        <article 
-          class="art-card reveal"
-          style={`--delay:${index * 120}ms`}
+
+        <article
+          class="mb-6 break-inside-avoid reveal group"
+          style={`--delay:${index * 100}ms`}
         >
 
-          <a href={`/gallery/${piece.title.toLowerCase().replaceAll(" ", "-")}`}>
+          <a href={`/gallery/${piece.slug}`}>
 
-            <figure>
-              <img 
-                src={piece.image}
+            <figure class="overflow-hidden rounded-xl">
+
+              <img
+                src={piece.image.src}
+                width={piece.image.width}
+                height={piece.image.height}
                 alt={piece.title}
                 loading="lazy"
+                class="w-full h-auto transition duration-300 group-hover:scale-[1.02]"
               />
 
-              <figcaption>
-                <h2>{piece.title}</h2>
+              <figcaption
+                class="absolute inset-0 flex flex-col justify-end bg-black/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100 p-5 text-white"
+              >
 
-                <p>
-                  {piece.medium} · {piece.year}
-                </p>
+                <h2 class="text-lg font-semibold">
+                  {piece.title}
+                </h2>
 
-                <span>
-                  View piece →
+                <span class="text-sm opacity-80">
+                  View Piece →
                 </span>
+
               </figcaption>
 
             </figure>
@@ -80,27 +80,26 @@ const artwork = [
           </a>
 
         </article>
+
       ))}
 
     </section>
 
-
   </main>
 
-<script>
-  const greeting = document.querySelector("#greeting");
+  <script>
+    const greeting = document.querySelector("#greeting");
 
-  if (greeting) {
-    const hour = new Date().getHours();
+    if (greeting) {
+      const hour = new Date().getHours();
 
-    if (hour >= 5 && hour < 12) {
-      greeting.textContent = "Good morning.";
-    } else if (hour >= 12 && hour < 18) {
-      greeting.textContent = "Good afternoon.";
-    } else {
-      greeting.textContent = "Good evening.";
+      greeting.textContent =
+        hour >= 5 && hour < 12
+          ? "Good morning."
+          : hour >= 12 && hour < 18
+          ? "Good afternoon."
+          : "Good evening.";
     }
-  }
-</script>
+  </script>
 
 </BaseLayout>
